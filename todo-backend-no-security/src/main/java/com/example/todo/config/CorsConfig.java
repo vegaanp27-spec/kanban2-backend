@@ -11,36 +11,22 @@ import java.util.List;
 
 @Configuration
 public class CorsConfig {
-
-    @Bean
-    public CorsFilter corsFilter() {
-        CorsConfiguration config = new CorsConfiguration();
-        // Ajusta el/los orígenes permitidos según el host y puerto de tu front (no uses "*" en producción)
-        config.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:8080"));
-        // Permitir credenciales (cookies, Authorization header) si es necesario
-        config.setAllowCredentials(true);
-        // Permitir todos los headers
-        config.addAllowedHeader("*");
-        // Permitir los métodos que use el API
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setMaxAge(3600L);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
-    }
-
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:8080"));
+
+        // Ajusta el origen de tu front — si usas React, normalmente es 3000
+        config.setAllowedOrigins(List.of("http://localhost:3000"));
+
         config.setAllowCredentials(true);
-        config.addAllowedHeader("*");
+        config.setAllowedHeaders(List.of("*"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
+
         return source;
     }
+
 }

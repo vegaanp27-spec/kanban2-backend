@@ -15,8 +15,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
-
+@CrossOrigin(origins = "*") // o 5173 si usas Vite
 @RestController
+
+
 @RequestMapping("/api/users")
 @Tag(name = "Users", description = "Gestión de usuarios")
 public class UserController {
@@ -43,18 +45,18 @@ public class UserController {
         return ResponseEntity.ok(new UserResponse(u.getId().longValue(), u.getUsername(), u.getEmail(), u.getFullName()));
     }
 
-    @PostMapping
-    @Operation(summary = "Crear usuario")
-    public ResponseEntity<UserResponse> create(@RequestBody @Valid CreateUserRequest req) {
-        User u = new User();
-        u.setUsername(req.getUsername());
-        u.setEmail(req.getEmail());
-        u.setFullName(req.getFullName());
-        // ensure password is hashed when creating via this endpoint
-        User created = userService.register(u, req.getPassword());
-        return ResponseEntity.created(URI.create("/api/users/" + created.getId()))
-                .body(new UserResponse(created.getId().longValue(), created.getUsername(), created.getEmail(), created.getFullName()));
-    }
+
+//    @Operation(summary = "Crear usuario")
+//    public ResponseEntity<UserResponse> create(@RequestBody @Valid CreateUserRequest req) {
+//        User u = new User();
+//        u.setUsername(req.getUsername());
+//        u.setEmail(req.getEmail());
+//        u.setFullName(req.getFullName());
+//        // ensure password is hashed when creating via this endpoint
+//        User created = userService.register(u, req.getPassword());
+//        return ResponseEntity.created(URI.create("/api/users/" + created.getId()))
+//                .body(new UserResponse(created.getId().longValue(), created.getUsername(), created.getEmail(), created.getFullName()));
+//    }
 
     @PostMapping("/register")
     @Operation(summary = "Registrar nuevo usuario (registra y devuelve token)")

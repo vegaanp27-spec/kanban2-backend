@@ -1,4 +1,4 @@
-# Todo Backend (sin seguridad) — Spring Boot 3 + Java 17 + PostgreSQL + Swagger
+# kANBAN  Backend  — Spring Boot 3 + Java 17 + PostgreSQL + Swagger+MAVEN 
 
 ## Requisitos
 - Java 17+
@@ -6,7 +6,7 @@
 - PostgreSQL 13+
 
 ## Ejecutar
-1. Crea la base de datos `todo` en PostgreSQL y ajusta credenciales en `src/main/resources/application.yml`.
+1. Crea la base de datos `kanban_2` en PostgreSQL y ajusta credenciales en `src/main/resources/application.yml`.
 2. `mvn spring-boot:run`
 3. Swagger UI: http://localhost:8080/swagger-ui.html
 
@@ -25,5 +25,5 @@
   - `DELETE /api/tasks/{id}`
 
 > Notas:
-> - Sin Spring Security ni JWT.
+> 
 > - Enums almacenados como `VARCHAR` (`EnumType.STRING`).
